@@ -1,0 +1,77 @@
+
+[core]
+    excludesfile = ~/.gitignore_global
+[color]
+    status      = auto
+    branch      = auto
+    interactive = auto
+    diff        = auto
+    grep        = auto
+    ui          = auto
+[log]
+    decorate = no
+[alias]
+    l         = log                                                    --pretty=format:"%C(yellow)%h\\ %C(reset)%s"                                            ; Log one per line no frills
+    ls        = log --decorate                                         --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line
+    ll        = log --decorate --numstat                               --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line with files changed
+    lds       = log --decorate                         --date=short    --pretty=format:"%C(yellow)%h\\ %ad\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d" ; Log one per line with dates
+    ld        = log --decorate                         --date=relative --pretty=format:"%C(yellow)%h\\ %ad\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d" ; Log one per line with relative dates
+    lg        = log --decorate           --graph                       --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line
+    llg       = log --decorate --numstat --graph                       --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line with files changed
+    lga       = log --decorate           --graph --all                 --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line
+    llga      = log --decorate --numstat --graph --all                 --pretty=format:"%C(yellow)%h\\ %C(reset)%<(72,trunc)%s%C(blue)\\ [%an]%C(red)%d"       ; Log one per line with files changed
+    logd      = log --decorate=full
+    slog      = log --show-signature
+    glog      = log --graph                               ; Graph log
+    filelog   = log -u                                    ; Log for file
+    fl        = log -u                                    ; Log for file
+    dl        = "!git ll -1"                              ; Show modified files in last commit
+    dlc       = diff --cached HEAD^                       ; Show diff of last commit
+    f         = "!git ls-files | grep -i"                 ; Find a file in a codebase
+    la        = "!git config -l | grep alias | cut -c 7-" ; List aliases
+    st        = status
+    ci        = commit -a
+    amend     = commit --amend --reset-author
+    up        = checkout
+    co        = checkout
+    sum       = status
+    di        = diff
+    bo        = branch
+    br        = branch
+    bookmarks = branch
+    branches  = branch
+    o         = log --graph @{u}..HEAD
+    out       = log --graph @{u}..HEAD
+    outp      = log -p      @{u}..HEAD
+    outgoing  = log --graph @{u}..HEAD
+    in        = log --graph HEAD..@{u}
+    incoming  = log --graph HEAD..@{u}
+    inp       = log -p      HEAD..@{u}
+    vimdiff   = difftool --tool=vimdiff --no-prompt
+    rpo       = remote prune origin
+    rps       = remote prune tmessi
+    rp        = "!git remote | xargs -n 1 git remote prune"
+    pb        = "!git branch --merged | grep -v "\\*" | xargs -n 1 git branch -d"
+    unstage   = reset HEAD --
+    last      = log -1 HEAD
+    uncommit  = reset --soft 'HEAD^'
+    fixupfile = "!f() { git commit --fixup=$(git log --all --full-history -1 --format=format:%h -- \"$1\") \"$@\";}; f"
+[push]
+    default = simple
+[commit]
+	gpgsign = true
+[pager]
+    diff   = delta
+    show   = delta
+    log    = delta
+    reflog = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    line-numbers = true
+    side-by-side = true
+    navigate     = true
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true
